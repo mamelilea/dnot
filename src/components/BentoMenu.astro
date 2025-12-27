@@ -1,0 +1,135 @@
+---
+import menuData from "../data/menu.json";
+import { generateWhatsAppLink } from "../utils/whatsapp";
+
+const bestSellers = menuData.filter((item) => item.category === "Best Seller");
+const [featured, ...others] = bestSellers; // Assuming first one is the big featured one, next are others
+// Need to map specific IDs to grid positions based on design if strict adherence is required,
+// or just flow them. Design shows:
+// 1. "The OG Glazed" - Big Large (col-span-2 row-span-2)
+// 2. "Pink Paradise" - Medium Wide (col-span-2 row-span-1)
+// 3. "Choco-Loco" - Small (col-span-1 row-span-1)
+// 4. "Blueberry Burst" - Small (col-span-1 row-span-1)
+
+const ogGlazed = menuData.find((item) => item.id === "og-glazed");
+const pinkParadise = menuData.find((item) => item.id === "pink-paradise");
+const chocoLoco = menuData.find((item) => item.id === "choco-loco");
+const blueberryBurst = menuData.find((item) => item.id === "blueberry-burst");
+---
+
+<div class="w-full max-w-[1080px] py-12 mx-auto px-4">
+    <div class="flex flex-col items-center mb-10 text-center">
+        <span
+            class="text-primary font-bold tracking-wider text-sm uppercase mb-2"
+            >Customer Favorites</span
+        >
+        <h2
+            class="text-4xl font-heading font-bold text-accent-chocolate dark:text-white"
+        >
+            Best Sellers
+        </h2>
+    </div>
+
+    <div
+        class="grid grid-cols-2 md:grid-cols-4 md:grid-rows-2 gap-4 auto-rows-auto md:h-[500px]"
+    >
+        <!-- Large Featured Item -->
+        {
+            ogGlazed && (
+                <div class="col-span-2 md:col-span-2 md:row-span-2 relative group overflow-hidden rounded-xl bg-accent-cream dark:bg-[#331825] transform transition-transform hover:scale-[1.01] duration-300 min-h-[300px] md:min-h-0">
+                    <div
+                        class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                        style={`background-image: url("${ogGlazed.image}");`}
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                    <div class="absolute bottom-0 left-0 p-8 text-white">
+                        <div class="bg-primary text-white text-xs font-bold px-3 py-1 rounded-full inline-block mb-3">
+                            #1 Fan Favorite
+                        </div>
+                        <h3 class="text-3xl font-heading font-bold mb-2">
+                            {ogGlazed.name}
+                        </h3>
+                        <p class="text-white/80 mb-4 max-w-xs">
+                            {ogGlazed.description}
+                        </p>
+                        <a
+                            href={generateWhatsAppLink(ogGlazed.name)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="flex items-center gap-2 text-sm font-bold hover:underline"
+                        >
+                            Add to Order{" "}
+                            <span class="material-symbols-outlined text-sm">
+                                arrow_forward
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            )
+        }
+
+        <!-- Top Right Item -->
+        {
+            pinkParadise && (
+                <div class="col-span-2 md:col-span-2 md:row-span-1 relative group overflow-hidden rounded-xl bg-pink-100 dark:bg-pink-900/20 min-h-[140px]">
+                    <div class="flex h-full items-center justify-between p-6 md:p-8">
+                        <div class="flex flex-col z-10">
+                            <h3 class="text-2xl font-heading font-bold text-accent-chocolate dark:text-white mb-1">
+                                {pinkParadise.name}
+                            </h3>
+                            <p class="text-sm text-accent-chocolate/70 dark:text-white/70 mb-3">
+                                {pinkParadise.description}
+                            </p>
+                            <span class="text-lg font-bold text-primary">
+                                ${pinkParadise.price}
+                            </span>
+                        </div>
+                        <div
+                            class="h-32 w-32 md:h-40 md:w-40 bg-cover bg-center rounded-full shadow-xl group-hover:rotate-12 transition-transform duration-500"
+                            style={`background-image: url("${pinkParadise.image}");`}
+                        />
+                    </div>
+                </div>
+            )
+        }
+
+        <!-- Bottom Right Item 1 -->
+        {
+            chocoLoco && (
+                <div class="col-span-1 md:col-span-1 md:row-span-1 relative group overflow-hidden rounded-xl bg-blue-50 dark:bg-blue-900/10 flex flex-col items-center justify-center p-4 text-center min-h-[180px]">
+                    <div
+                        class="w-24 h-24 rounded-full bg-cover bg-center shadow-lg mb-3 group-hover:-translate-y-2 transition-transform duration-300"
+                        style={`background-image: url("${chocoLoco.image}");`}
+                    />
+                    <h3 class="font-bold text-lg leading-tight text-accent-chocolate dark:text-white">
+                        {chocoLoco.name}
+                    </h3>
+                    <span class="text-primary font-bold text-sm">
+                        ${chocoLoco.price}
+                    </span>
+                </div>
+            )
+        }
+
+        <!-- Bottom Right Item 2 -->
+        {
+            blueberryBurst && (
+                <div class="col-span-1 md:col-span-1 md:row-span-1 relative group overflow-hidden rounded-xl bg-purple-50 dark:bg-purple-900/10 flex flex-col items-center justify-center p-4 text-center min-h-[180px]">
+                    <div
+                        class="w-24 h-24 rounded-full bg-cover bg-center shadow-lg mb-3 group-hover:-translate-y-2 transition-transform duration-300"
+                        style={`background-image: url("${blueberryBurst.image}");`}
+                    />
+                    <h3 class="font-bold text-lg leading-tight text-accent-chocolate dark:text-white">
+                        {blueberryBurst.name}
+                    </h3>
+                    <span class="text-primary font-bold text-sm">
+                        ${blueberryBurst.price}
+                    </span>
+                </div>
+            )
+        }
+    </div>
+</div>
+
+<!-- Spacer for mobile -->
+<div class="h-8 md:h-0"></div>

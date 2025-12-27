@@ -1,0 +1,293 @@
+---
+import { generateWhatsAppLink } from "../utils/whatsapp";
+---
+
+<div class="flex justify-center sticky top-4 z-50 px-4 sm:px-10 w-full">
+    <header
+        id="navbar"
+        class="flex items-center justify-between whitespace-nowrap bg-white/80 dark:bg-[#221019]/80 backdrop-blur-md border border-[#f3e7ed] dark:border-white/10 px-6 py-3 rounded-full shadow-lg w-full max-w-[1080px] transition-all duration-300 relative"
+    >
+        <div
+            class="flex items-center gap-4 text-accent-chocolate dark:text-white"
+        >
+            <div class="size-8 text-primary flex items-center justify-center">
+                <span class="material-symbols-outlined text-[32px]"
+                    >donut_large</span
+                >
+            </div>
+            <h2
+                class="text-accent-chocolate dark:text-white text-xl font-heading font-bold leading-tight tracking-wide"
+            >
+                Dnot
+            </h2>
+        </div>
+
+        <!-- Desktop Nav -->
+        <div class="hidden md:flex items-center gap-8" id="nav-links">
+            <a
+                class="text-accent-chocolate dark:text-white hover:text-primary transition-colors text-sm font-bold"
+                href="#menu">Menu</a
+            >
+            <a
+                class="text-accent-chocolate dark:text-white hover:text-primary transition-colors text-sm font-bold"
+                href="#about">About</a
+            >
+            <a
+                class="text-accent-chocolate dark:text-white hover:text-primary transition-colors text-sm font-bold"
+                href="#locations">Locations</a
+            >
+        </div>
+
+        <!-- Search Bar Overlay (Hidden by default) -->
+        <div
+            id="search-bar"
+            class="hidden absolute left-1/2 -translate-x-1/2 w-full max-w-md bg-white dark:bg-[#2a1520] rounded-full shadow-xl border border-primary/20 p-1 items-center z-50"
+        >
+            <input
+                type="text"
+                id="navbar-search-input"
+                placeholder="What are you craving?"
+                class="flex-1 bg-transparent border-none focus:ring-0 text-sm px-4 outline-none dark:text-white"
+            />
+            <button
+                id="close-search"
+                class="p-2 text-gray-400 hover:text-primary rounded-full"
+            >
+                <span class="material-symbols-outlined text-sm">close</span>
+            </button>
+        </div>
+
+        <div class="flex items-center gap-2 sm:gap-4">
+            <!-- Aesthetic Dark Mode Toggle -->
+            <label class="theme-switch" aria-label="Toggle dark mode">
+                <input type="checkbox" id="theme-checkbox" />
+                <span class="theme-slider">
+                    <div class="star star_1"></div>
+                    <div class="star star_2"></div>
+                    <div class="star star_3"></div>
+                    <svg viewBox="0 0 16 16" class="cloud">
+                        <path
+                            transform="matrix(.77976 0 0 .78395-299.99-418.63)"
+                            fill="#fff"
+                            d="m391.84 540.91c-.421-.329-.949-.524-1.523-.524-1.351 0-2.451 1.084-2.485 2.435-1.395.526-2.388 1.88-2.388 3.466 0 1.874 1.385 3.423 3.182 3.667v.034h12.73v-.006c1.775-.104 3.182-1.584 3.182-3.395 0-1.747-1.309-3.186-2.994-3.379.007-.106.011-.214.011-.322 0-2.707-2.271-4.901-5.072-4.901-2.073 0-3.856 1.202-4.643 2.925"
+                        ></path>
+                    </svg>
+                </span>
+            </label>
+            <button
+                id="search-toggle"
+                class="flex items-center justify-center rounded-full size-10 bg-primary/10 hover:bg-primary/20 text-primary transition-colors relative z-50"
+                aria-label="Search"
+                type="button"
+            >
+                <span class="material-symbols-outlined">search</span>
+            </button>
+            <a
+                href="https://wa.me/628999999999?text=Halo%20Dnot,%20saya%20mau%20pesan"
+                target="_blank"
+                class="flex items-center justify-center overflow-hidden rounded-full h-10 bg-primary hover:bg-primary/90 transition-colors text-white gap-2 px-4 shadow-glow"
+                aria-label="Cart"
+            >
+                <span class="material-symbols-outlined text-[20px]"
+                    >shopping_bag</span
+                >
+                <span class="font-bold text-sm hidden sm:block">Order</span>
+            </a>
+        </div>
+    </header>
+</div>
+
+<style>
+    /* Aesthetic Theme Switch */
+    .theme-switch {
+        font-size: 14px;
+        position: relative;
+        display: inline-block;
+        width: 3.5em;
+        height: 2em;
+        border-radius: 30px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+    }
+
+    .theme-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .theme-slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #2a2a2a;
+        transition: 0.4s;
+        border-radius: 30px;
+        overflow: hidden;
+    }
+
+    .theme-slider:before {
+        position: absolute;
+        content: "";
+        height: 1.2em;
+        width: 1.2em;
+        border-radius: 20px;
+        left: 0.4em;
+        bottom: 0.4em;
+        transition: 0.4s;
+        transition-timing-function: cubic-bezier(0.81, -0.04, 0.38, 1.5);
+        box-shadow: inset 8px -4px 0px 0px #fff;
+    }
+
+    .theme-switch input:checked + .theme-slider {
+        background-color: #87ceeb;
+    }
+
+    .theme-switch input:checked + .theme-slider:before {
+        transform: translateX(1.5em);
+        box-shadow: inset 15px -4px 0px 15px #ffcf48;
+    }
+
+    .star {
+        background-color: #fff;
+        border-radius: 50%;
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        transition: all 0.4s;
+    }
+
+    .star_1 {
+        left: 2.2em;
+        top: 0.4em;
+    }
+
+    .star_2 {
+        left: 1.9em;
+        top: 1em;
+    }
+
+    .star_3 {
+        left: 2.6em;
+        top: 0.7em;
+    }
+
+    .theme-switch input:checked ~ .theme-slider .star {
+        opacity: 0;
+    }
+
+    .cloud {
+        width: 3em;
+        position: absolute;
+        bottom: -1em;
+        left: -0.8em;
+        opacity: 0;
+        transition: all 0.4s;
+    }
+
+    .theme-switch input:checked ~ .theme-slider .cloud {
+        opacity: 1;
+    }
+</style>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const navbar = document.getElementById("navbar");
+    const searchToggle = document.getElementById("search-toggle");
+    const searchBar = document.getElementById("search-bar");
+    const closeSearch = document.getElementById("close-search");
+    const searchInput = document.getElementById(
+        "navbar-search-input",
+    ) as HTMLInputElement;
+
+    ScrollTrigger.create({
+        start: "top -100",
+        onUpdate: (self) => {
+            if (self.direction === 1 && self.progress > 0.1) {
+                // Scrolling down - could hide nav or shrink
+            }
+        },
+    });
+
+    // Search Toggle Logic
+    searchToggle?.addEventListener("click", () => {
+        searchBar?.classList.remove("hidden");
+        searchBar?.classList.add("flex");
+        gsap.from(searchBar, { opacity: 0, y: -10, duration: 0.3 });
+        searchInput?.focus();
+    });
+
+    closeSearch?.addEventListener("click", () => {
+        gsap.to(searchBar, {
+            opacity: 0,
+            y: -10,
+            duration: 0.2,
+            onComplete: () => {
+                searchBar?.classList.add("hidden");
+                searchBar?.classList.remove("flex");
+            },
+        });
+    });
+
+    searchInput?.addEventListener("input", (e) => {
+        const query = (e.target as HTMLInputElement).value;
+        const event = new CustomEvent("search-menu", { detail: query });
+        document.dispatchEvent(event);
+    });
+
+    // === Dark Mode Toggle ===
+    const themeCheckbox = document.getElementById(
+        "theme-checkbox",
+    ) as HTMLInputElement;
+    const html = document.documentElement;
+
+    // Check for saved theme preference or default to system preference
+    function getThemePreference(): "dark" | "light" {
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme === "dark" || savedTheme === "light") {
+            return savedTheme;
+        }
+        // Check system preference
+        return window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+    }
+
+    // Apply theme and sync checkbox
+    function applyTheme(theme: "dark" | "light") {
+        if (theme === "dark") {
+            html.classList.add("dark");
+            if (themeCheckbox) themeCheckbox.checked = false; // Dark = unchecked (moon)
+        } else {
+            html.classList.remove("dark");
+            if (themeCheckbox) themeCheckbox.checked = true; // Light = checked (sun)
+        }
+        localStorage.setItem("theme", theme);
+    }
+
+    // Initialize theme on load
+    applyTheme(getThemePreference());
+
+    // Toggle theme on checkbox change
+    themeCheckbox?.addEventListener("change", () => {
+        const newTheme = themeCheckbox.checked ? "light" : "dark";
+        applyTheme(newTheme);
+    });
+
+    // Listen for system theme changes
+    window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .addEventListener("change", (e) => {
+            // Only auto-switch if user hasn't manually set preference
+            if (!localStorage.getItem("theme")) {
+                applyTheme(e.matches ? "dark" : "light");
+            }
+        });
+</script>

@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+/* Enable class-based dark mode */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    /* Colors */
+    --color-primary: #f471b5;
+    --color-background-light: #f8f6f7;
+    --color-background-dark: #221019;
+    --color-accent-chocolate: #451A03;
+    --color-accent-cream: #FFFBEB;
+
+    /* Fonts */
+    --font-display: "Plus Jakarta Sans", "sans-serif";
+    --font-heading: "Fredoka", "sans-serif";
+
+    /* Border Radius */
+    --radius-lg: 2rem;
+    --radius-xl: 3rem;
+
+    /* Shadows */
+    --shadow-floating: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --shadow-glow: 0 0 15px rgba(244, 113, 181, 0.5);
+}
+
+/* Custom Utilities for Animations in CSS if needed, though we will use GSAP primarily */
+@layer utilities {
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+        /* Firefox */
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+}

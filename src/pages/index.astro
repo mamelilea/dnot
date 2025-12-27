@@ -1,0 +1,25 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Hero from "../components/Hero.astro";
+import Features from "../components/Features.astro";
+import BentoMenu from "../components/BentoMenu.astro";
+import MenuGrid from "../components/MenuGrid.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout title="Dnot | Round. Fluffy. Perfection.">
+	<div class="relative min-h-screen w-full flex flex-col group/design-root">
+		<!-- Main Layout Container -->
+		<div class="layout-container flex h-full grow flex-col z-10">
+			<Navbar />
+			<main class="flex flex-col items-center w-full px-4 sm:px-10 pb-10">
+				<Hero />
+				<Features />
+				<BentoMenu />
+				<MenuGrid />
+				<Footer />
+			</main>
+		</div>
+	</div>
+</Layout>

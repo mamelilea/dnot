@@ -1,0 +1,272 @@
+---
+import menuData from "../data/menu.json";
+import ProductCard from "./ProductCard.astro";
+
+// Get unique categories and add 'All'
+const categories = [
+    "All Donuts",
+    ...new Set(menuData.map((item) => item.category || "Regular")),
+];
+---
+
+<div class="w-full max-w-[1080px] py-12 mx-auto px-4" id="menu">
+    <div
+        class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4"
+    >
+        <div class="flex flex-col">
+            <span
+                class="text-primary font-bold tracking-wider text-sm uppercase mb-2"
+                >Our Menu</span
+            >
+            <h2
+                class="text-4xl font-heading font-bold text-accent-chocolate dark:text-white"
+            >
+                Fresh from the Oven
+            </h2>
+        </div>
+
+        <!-- Search and Filter Controls -->
+        <div class="flex flex-col gap-4 items-end w-full md:w-auto">
+            <!-- Search Bar (Mobile only) -->
+            <div class="relative w-full md:hidden" id="mobile-search-container">
+                <span
+                    class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                    >search</span
+                >
+                <input
+                    type="text"
+                    id="menu-search-mobile"
+                    placeholder="Search donuts..."
+                    class="w-full pl-10 pr-4 py-3 rounded-full border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 focus:outline-none focus:border-primary transition-colors text-sm"
+                />
+            </div>
+
+            <div
+                class="flex gap-2 overflow-x-auto pb-2 scrollbar-show md:scrollbar-hide w-full md:w-auto justify-start md:justify-end"
+                id="category-filters"
+            >
+                {
+                    categories.map((category, index) => (
+                        <button
+                            class={`px-6 py-2 rounded-full font-bold text-sm whitespace-nowrap transition-colors filter-btn ${index === 0 ? "bg-accent-chocolate text-white active" : "bg-transparent border border-gray-200 dark:border-white/10 hover:bg-gray-50 dark:hover:bg-white/5 text-accent-chocolate dark:text-white"}`}
+                            data-category={category}
+                        >
+                            {category}
+                        </button>
+                    ))
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Grid -->
+    <div
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+        id="product-grid"
+    >
+        {
+            menuData.map((item) => (
+                <div
+                    class="menu-item-wrapper"
+                    data-category={item.category || "Regular"}
+                    data-name={item.name.toLowerCase()}
+                >
+                    <ProductCard
+                        id={item.id}
+                        name={item.name}
+                        price={item.price}
+                        image={item.image}
+                        description={item.description}
+                    />
+                </div>
+            ))
+        }
+    </div>
+
+    <!-- Empty State -->
+    <div
+        id="empty-state"
+        class="hidden flex-col items-center justify-center py-12 text-center"
+    >
+        <span class="material-symbols-outlined text-6xl text-gray-300 mb-4"
+            >cookie_off</span
+        >
+        <p class="text-lg text-gray-500 font-bold">
+            No donuts found matching your search.
+        </p>
+        <button
+            id="reset-filters"
+            class="mt-4 text-primary hover:underline font-bold">Show All</button
+        >
+    </div>
+
+    <div class="flex justify-center mt-24 md:mt-12 mb-8 relative z-10">
+        <a
+            href="#menu"
+            class="h-12 px-8 rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-white font-bold transition-colors flex items-center justify-center"
+            onclick="document.querySelector('.filter-btn[data-category=\'All Donuts\']').click()"
+        >
+            View Full Menu
+        </a>
+    </div>
+</div>
+
+<script>
+    import VanillaTilt from "vanilla-tilt";
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Initialize VanillaTilt
+    const initTilt = () => {
+        const cards = document.querySelectorAll<HTMLElement>("[data-tilt]");
+        VanillaTilt.init(cards, {
+            max: 10,
+            speed: 400,
+            glare: true,
+            "max-glare": 0.3,
+            scale: 1.02,
+        });
+    };
+    initTilt();
+
+    // GSAP Reveal
+    const revealItems = () => {
+        gsap.fromTo(
+            ".menu-item-wrapper:not(.hidden)",
+            { y: 30, opacity: 0 },
+            {
+                y: 0,
+                opacity: 1,
+                duration: 0.5,
+                stagger: 0.05,
+                ease: "power2.out",
+                clearProps: "all", // Important for interactions after animation
+            },
+        );
+    };
+
+    // Staggered Reveal on Load/Scroll
+    gsap.from(".menu-item-wrapper", {
+        scrollTrigger: {
+            trigger: "#menu",
+            start: "top 80%",
+        },
+        y: 50,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: "back.out(1.7)",
+        onComplete: () => {
+            // Ensure opacity is set to 1 after animation to avoid "disappearing" issues
+            gsap.set(".menu-item-wrapper", { opacity: 1 });
+        },
+    });
+
+    // Filtering Logic
+    const filterBtns = document.querySelectorAll(".filter-btn");
+    const items = document.querySelectorAll(
+        ".menu-item-wrapper",
+    ) as NodeListOf<HTMLElement>;
+    const searchInput = document.getElementById(
+        "menu-search-mobile",
+    ) as HTMLInputElement;
+    const desktopSearch = document.getElementById(
+        "navbar-search-input",
+    ) as HTMLInputElement; // Will be added in Navbar
+    const emptyState = document.getElementById("empty-state");
+    const resetBtn = document.getElementById("reset-filters");
+
+    let currentCategory = "All Donuts";
+    let currentSearch = "";
+
+    const filterItems = () => {
+        let visibleCount = 0;
+
+        items.forEach((item) => {
+            const itemCategory = item.dataset.category;
+            const itemName = item.dataset.name;
+            const matchesCategory =
+                currentCategory === "All Donuts" ||
+                itemCategory === currentCategory;
+            const matchesSearch = itemName.includes(
+                currentSearch.toLowerCase(),
+            );
+
+            if (matchesCategory && matchesSearch) {
+                item.classList.remove("hidden");
+                item.style.display = "block"; // Ensure display is reset
+                visibleCount++;
+            } else {
+                item.classList.add("hidden");
+                item.style.display = "none";
+            }
+        });
+
+        if (visibleCount === 0) {
+            emptyState.classList.remove("hidden");
+            emptyState.classList.add("flex");
+        } else {
+            emptyState.classList.add("hidden");
+            emptyState.classList.remove("flex");
+            revealItems(); // Re-animate filtering
+        }
+    };
+
+    filterBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            // Update Active State
+            filterBtns.forEach((b) => {
+                b.classList.remove(
+                    "bg-accent-chocolate",
+                    "text-white",
+                    "active",
+                );
+                b.classList.add(
+                    "bg-transparent",
+                    "text-accent-chocolate",
+                    "dark:text-white",
+                );
+            });
+            btn.classList.remove(
+                "bg-transparent",
+                "text-accent-chocolate",
+                "dark:text-white",
+            );
+            btn.classList.add("bg-accent-chocolate", "text-white", "active");
+
+            currentCategory = btn.getAttribute("data-category");
+            filterItems();
+        });
+    });
+
+    if (searchInput) {
+        searchInput.addEventListener("input", (e) => {
+            currentSearch = (e.target as HTMLInputElement).value;
+            filterItems();
+        });
+    }
+
+    // Listen for custom event from Navbar search
+    document.addEventListener("search-menu", (e: CustomEvent) => {
+        currentSearch = e.detail;
+        filterItems();
+        // Scroll to menu if not visible
+        document.getElementById("menu").scrollIntoView({ behavior: "smooth" });
+    });
+
+    if (resetBtn) {
+        resetBtn.addEventListener("click", () => {
+            currentSearch = "";
+            currentCategory = "All Donuts";
+            if (searchInput) searchInput.value = "";
+            // Reset active button visual
+            filterBtns.forEach((b) => {
+                if (b.getAttribute("data-category") === "All Donuts") {
+                    b.click();
+                }
+            });
+        });
+    }
+</script>

@@ -1,0 +1,92 @@
+[
+    {
+        "id": "og-glazed",
+        "name": "The OG Glazed",
+        "price": "3.50",
+        "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuA2nQ1yenQj5uKWCufyuVHCRUDq8FVuGTcf8QFAbUYlLu2phfcfZ2R98hVrbEhDMBhzXH7sAyxvoBc3wu5gyfybI06NKx8fp5_ZIr0Cga6Pze17iGAnDPLsPq4iX9z6WsTeAhRpY6CIwcxIFKtb8NDeWMvssSXfDi29iIHnGQBY9ces6dOhFT1raA8-wrOPPc2VPWDaRS6iVcyOarfrQfoWBaJ5ZgeCeEFHVf5zDKh2Fr90REAYJgYafEXL03TI3YMsiXWER6um0JnT",
+        "description": "Our signature 24-hour raised yeast dough with a honey vanilla glaze.",
+        "category": "Best Seller",
+        "featured": true
+    },
+    {
+        "id": "pink-paradise",
+        "name": "Pink Paradise",
+        "price": "4.50",
+        "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuDAw50X4aeP6eo-ufdQ9MItNPkzMXCrVw4vnmniyT6_KAdOIk4LuOIq-PBsEEpsFupjJEdFX33nfPH6rc2WsPDMhpSvWpfiIRb8EXUTwmHCyRGgqLSZLgO4bciqTkGbi7z1gY3yFbS2pWpKVaRIymDgx-n_FnG5LatCT6jZlgGpltO5w8wGLK8Fu5yO0n_b3DRL9r_OHu4vBqHG-t_1YyGgA0Gt3WfznDYhtO4SDmLantXIw19LcF-6Sm2-GPvyI-88SlzeEcnI91Da",
+        "description": "Strawberry infused frosting",
+        "category": "Best Seller",
+        "featured": true
+    },
+    {
+        "id": "choco-loco",
+        "name": "Choco-Loco",
+        "price": "3.75",
+        "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuDCaOWO9EORtH-9ZrhR6qspuyq1-C3J6EO9yoFFdCC50C8SpHpit8ugio4u82e4CZ1in3bZJhZ5lCoAeUJt95xqUXYVfvQFLd8kSZQ2yOYQof9uuAn4XNojvQvOGaz5MU38Izr7IuVCprL4WJnLMuqOoXqM7E7iF3cvYEETIWM62zkAqZzAZVV6thIpBD8Z2IvB1MgTT-q0Z9bJOQLLul_BQ3j-wG76ysiGJaZSPJqnt4Xr5K6Nmk5X20_fRjqQeO88QJRoY19k29eP",
+        "description": "Chocolate frosted donut",
+        "category": "Best Seller",
+        "featured": false
+    },
+    {
+        "id": "blueberry-burst",
+        "name": "Blueberry Burst",
+        "price": "4.25",
+        "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCajcZmHwMcoYZ9i-L-wFmBa-RlhmVNlR8WXKH76U91ZjD-x0Qt2luO7dMRk4znDQ3BCitS86jJFcXyxCRoLp88-7DmEvRpWOZ0psW27Okkz9n5djjuVfG3XRV_SKRcYCf8gu3aU7EErNVvM94U7RRNMpx2xDnoCgw1BTnlnRO3hL1Ag1w1oeBts3PMkCci4LK7pHunjMWv58AdNM7YUDOssWr2f0qu1HvPzTa-XNMe5-1L4w-ogSbA2TefJPVzU_ZIt_3wXR49xxln",
+        "description": "Blueberry filled donut",
+        "category": "Best Seller",
+        "featured": false
+    },
+    {
+        "id": "rainbow-sprinkles",
+        "name": "Rainbow Sprinkles",
+        "price": "3.50",
+        "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuB0LLlG5cDpXN4kftyDnDL-59ATaT5Jja1caqnRcwtS3wXOEecOMqRvy2aYfS-JwhgPkAyr2XesprKCxaG7ynGkiSHsrQkMACMGb1VetPSBw6sWAJ5qpOrKtkFQVkRZa-6KmcaA97bHJNBfLIzbqwQLU-JfoWnpmjE0VvC3G4FSuHQmSl1UQB5qqXeK8_oqPS5X3onqa9SApig1_HQ2n54EtzOhgwURcVxh3_egetL25xBnT9rxI33w8hEM5UM3PodjirvM4rYptLgw",
+        "description": "Classic vanilla cake donut topped with rich buttercream and rainbow sprinkles.",
+        "category": "Regular",
+        "featured": false
+    },
+    {
+        "id": "matcha-magic",
+        "name": "Matcha Magic",
+        "price": "4.25",
+        "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCvl5onR-DpPW8RxQQDGCZV2sZdqezrkrovsLss9lvUOLrQGnpI2qhvji_fg4UpIJhsg6VHe-NijWXy2ymbdD9HPuoVRjsRkISwl7FAWdi2CAcn8UfJHf-vbUZpkhw1pgENn5y2-ie2_Bg7u8blkcdzvFAgv9nL6mtdalURkPX6z7MJwqSgFAPg11bPr39j0fvWE-h9RT-H-K2UC8mfscjM8KDpk906_s5lZcC2P2Qy_7llaZHaU64lrUIU-WoARf8fyZ3IpMlkzQ7E",
+        "description": "Premium Japanese matcha infused glaze on a fluffy yeast ring.",
+        "category": "Regular",
+        "featured": false
+    },
+    {
+        "id": "maple-bacon",
+        "name": "Maple Bacon",
+        "price": "5.00",
+        "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuBINtKf_3yCO2w5bUdcDXMNrU9xLDrk4eRzInkJNiCuThwcUbyGxOPdeRX285hzVdKCMNgTh6VOetzyNvd-imyUUFxJskNJkFfpQJX4RHq8gt4cozWxoFrIXTI_BBIAv_KDy_hP3V7uFVS5NaxxA4oa_mV4vy7ev9UpP2x8Vlfrj7o0TsOvB1QxZEZH4p7WkHcCmsIJNXwk1QeTV0tNyxEHp8o2WPMS-0Rbc8RaiBAGALWKuSeV1jY68MR8w-XoOxa9kH1slcX8_rfY",
+        "description": "Savory meets sweet. Real maple syrup glaze topped with crispy bacon bits.",
+        "category": "Regular",
+        "featured": false
+    },
+    {
+        "id": "cinnamon-twist",
+        "name": "Cinnamon Twist",
+        "price": "3.00",
+        "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCKCU6cFOe7YyM8ZqlYjkRq_YAN0gEXqydWzf7l8CToltYEKO9Kv7yQY2MXV5MQQ1_9NiHABNDZZyI6VWoo75s4tB9SFnSCaWCeAcNQLTzGUpXk69TqvPsz769zSn0_UGFDKlTeyh-7NaeHIAtrVm-aZgFEgHqZr9-l0vat8cQK4bIOUzLW4UbSm4Y1dKPVUsx_YbhKJreNJ7455LeO5u_xGf8r64tJtZtJ8IyVXKLGiAwWFVOovSZxbTopt_KMAz9vp3RmQPSZqMtt",
+        "description": "Braided dough rolled in cinnamon sugar while still warm.",
+        "category": "Regular",
+        "featured": false
+    },
+    {
+        "id": "death-by-chocolate",
+        "name": "Death by Chocolate",
+        "price": "4.50",
+        "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuDwkT1yEsNYaXFVxq03qEAJvFK0LFYb6CEEJpTHVtdTilgN-wdWLGqoYo7jojhjUD6O_IKnOJPzE_PgBFQm-GxjhnqC9OC9oubiMxSxA8ZQwtCAI4Uy4BSZNkMziO0r0aAplJUW_LFK52Yu7kNOiUplny_p7UK8PbxGsgrT4ekcCR7EOfAzKKod6AG5OeM2xCg8wk4XIzGEH5ZMCjgcaOwTqLeBt3wsONj9KdLK9FHxHaQPCZV-3poopSp91Nmk-oaKpmWveR4zm6aD",
+        "description": "Chocolate cake donut, chocolate glaze, chocolate shavings.",
+        "category": "Regular",
+        "featured": false
+    },
+    {
+        "id": "berry-bliss",
+        "name": "Berry Bliss",
+        "price": "3.95",
+        "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuAl8psdnKrBtd3tRaILxMb8UJZ3hBoSPZPqc5XAvtThv0svcd8bpe3z3MIIG8ZOrSC801oEZvJrye7GmyIlhjGNTMQlXSlnxEKHu0vfslS5xvSZH9ZwirxQI3TVWOQL0SvfgVwEpsSKXmyW2JIPi7XxEpxpRcqUScybDhSSjfZYvlBLpBmxX0vD5FXhct5Bfn85AL8MzzDsOtLOWEyvX6M_Z0tGbmq73sSFpwduDU3RwNzW8YTXx4Yr2IQuhcfn_fxMak93ZGf8Yxfl",
+        "description": "Powdered sugar exterior with a bursting blueberry jam center.",
+        "category": "Regular",
+        "featured": false
+    }
+]

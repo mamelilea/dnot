@@ -1,0 +1,137 @@
+---
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+import "../styles/global.css";
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Dnot - Round. Fluffy. Perfection." />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Fredoka:wght@400;600;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+			rel="stylesheet"
+		/>
+		<title>{title}</title>
+		<!-- Prevent flash of wrong theme -->
+		<script is:inline>
+			(function () {
+				const savedTheme = localStorage.getItem("theme");
+				if (
+					savedTheme === "dark" ||
+					(!savedTheme &&
+						window.matchMedia("(prefers-color-scheme: dark)")
+							.matches)
+				) {
+					document.documentElement.classList.add("dark");
+				}
+			})();
+		</script>
+	</head>
+	<body
+		class="bg-background-light dark:bg-background-dark text-accent-chocolate dark:text-white font-display overflow-x-hidden selection:bg-primary selection:text-white"
+	>
+		<!-- Global Custom Cursor (hidden on mobile) -->
+		<div
+			id="custom-cursor"
+			class="fixed pointer-events-none z-[9999] mix-blend-difference hidden md:block"
+		>
+			<div
+				class="w-10 h-10 rounded-full border-2 border-white flex items-center justify-center"
+			>
+				<div class="w-2 h-2 rounded-full bg-white"></div>
+			</div>
+		</div>
+		<div
+			class="fixed inset-0 pointer-events-none overflow-hidden z-0 opacity-20 dark:opacity-5"
+		>
+			<div
+				class="absolute top-[10%] left-[5%] w-8 h-2 bg-primary rounded-full rotate-45"
+			>
+			</div>
+			<div
+				class="absolute top-[20%] right-[10%] w-2 h-2 bg-yellow-400 rounded-full"
+			>
+			</div>
+			<div
+				class="absolute bottom-[30%] left-[15%] w-6 h-2 bg-blue-300 rounded-full -rotate-12"
+			>
+			</div>
+			<div
+				class="absolute top-[50%] right-[25%] w-2 h-2 bg-green-300 rounded-full"
+			>
+			</div>
+			<div
+				class="absolute bottom-[10%] right-[5%] w-8 h-2 bg-primary rounded-full rotate-90"
+			>
+			</div>
+		</div>
+		<slot />
+
+		<script>
+			import Lenis from "lenis";
+
+			const lenis = new Lenis({
+				duration: 1.2,
+				easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+				touchMultiplier: 2,
+				infinite: false,
+			});
+
+			function raf(time: number) {
+				lenis.raf(time);
+				requestAnimationFrame(raf);
+			}
+
+			requestAnimationFrame(raf);
+
+			// === Global Custom Cursor Follower ===
+			const cursor = document.getElementById("custom-cursor");
+
+			let cursorX = 0;
+			let cursorY = 0;
+			let targetX = 0;
+			let targetY = 0;
+
+			// Smooth cursor movement with more delay
+			function animateCursor() {
+				const easing = 0.08; // Lower = more delay/lag
+				cursorX += (targetX - cursorX) * easing;
+				cursorY += (targetY - cursorY) * easing;
+
+				if (cursor) {
+					cursor.style.left = cursorX - 20 + "px";
+					cursor.style.top = cursorY - 20 + "px";
+				}
+
+				requestAnimationFrame(animateCursor);
+			}
+
+			// Track mouse position
+			document.addEventListener("mousemove", (e) => {
+				targetX = e.clientX;
+				targetY = e.clientY;
+			});
+
+			// Hide follower on mobile/touch devices
+			if (window.matchMedia("(hover: hover)").matches) {
+				animateCursor();
+			} else if (cursor) {
+				cursor.style.display = "none";
+			}
+		</script>
+	</body>
+</html>

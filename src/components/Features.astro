@@ -1,0 +1,176 @@
+---
+
+---
+
+<section id="features-section" class="relative py-32 overflow-hidden">
+    <div class="container mx-auto px-6 md:px-12">
+        <!-- Section Label -->
+        <div class="mb-16">
+            <span
+                class="text-primary font-black tracking-widest text-sm uppercase"
+            >
+                Why Dnot?
+            </span>
+        </div>
+
+        <!-- Text Reveal Container -->
+        <div id="text-reveal-container" class="space-y-20 md:space-y-32">
+            <!-- Item 1: BAKED FRESH -->
+            <div class="reveal-item">
+                <h2
+                    class="reveal-text font-heading font-black text-[12vw] md:text-[8vw] leading-none tracking-tighter uppercase"
+                >
+                    <span class="text-content">BAKED FRESH</span>
+                </h2>
+                <p
+                    class="reveal-text-sub text-lg md:text-2xl mt-6 max-w-lg font-bold pl-3 border-l-4 border-primary text-accent-chocolate dark:text-white"
+                >
+                    4 AM Start. Zero Leftovers.<br />Maximum Fluffiness
+                    Guaranteed.
+                </p>
+            </div>
+
+            <!-- Item 2: 100% ORGANIC -->
+            <div class="reveal-item">
+                <h2
+                    class="reveal-text font-heading font-black text-[12vw] md:text-[8vw] leading-none tracking-tighter uppercase"
+                >
+                    <span class="text-content">100% ORGANIC</span>
+                </h2>
+                <p
+                    class="reveal-text-sub text-lg md:text-2xl mt-6 max-w-lg font-bold pl-3 border-l-4 border-green-500 text-accent-chocolate dark:text-white"
+                >
+                    Locally Sourced. Cage-Free Eggs.<br />Real Vanilla Beans.
+                </p>
+            </div>
+
+            <!-- Item 3: LIGHTNING FAST -->
+            <div class="reveal-item">
+                <h2
+                    class="reveal-text font-heading font-black text-[12vw] md:text-[8vw] leading-none tracking-tighter uppercase"
+                >
+                    <span class="text-content">LIGHTNING FAST</span>
+                </h2>
+                <p
+                    class="reveal-text-sub text-lg md:text-2xl mt-6 max-w-lg font-bold pl-3 border-l-4 border-blue-500 text-accent-chocolate dark:text-white"
+                >
+                    Oven to Doorstep in 30 Mins.<br />Hot &amp; Fresh.
+                </p>
+            </div>
+
+            <!-- Item 4: PURE LOVE -->
+            <div class="reveal-item">
+                <h2
+                    class="reveal-text font-heading font-black text-[12vw] md:text-[8vw] leading-none tracking-tighter uppercase"
+                >
+                    <span class="text-content">PURE LOVE</span>
+                </h2>
+                <p
+                    class="reveal-text-sub text-lg md:text-2xl mt-6 max-w-lg font-bold pl-3 border-l-4 border-pink-500 text-accent-chocolate dark:text-white"
+                >
+                    Hand-shaped. Hand-glazed.<br />Edible Art.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Light mode: gray to chocolate */
+    .reveal-text .text-content {
+        background: linear-gradient(to right, #451a03 50%, #a89080 50%);
+        background-size: 200% 100%;
+        background-position: 100% 0;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        transition: background-position 0.1s ease-out;
+    }
+
+    /* Dark mode: gray to white */
+    :global(.dark) .reveal-text .text-content {
+        background: linear-gradient(to right, #ffffff 50%, #666666 50%);
+        background-size: 200% 100%;
+        background-position: 100% 0;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .reveal-text-sub {
+        opacity: 0.3;
+        transition: opacity 0.3s ease-out;
+    }
+
+    .reveal-text-sub.revealed {
+        opacity: 0.9;
+    }
+</style>
+
+<script>
+    // === Scroll-based Text Reveal ===
+    function setupTextReveal() {
+        const revealItems = document.querySelectorAll(".reveal-item");
+
+        function updateReveal() {
+            revealItems.forEach((item) => {
+                const textEl = item.querySelector(
+                    ".reveal-text .text-content",
+                ) as HTMLElement;
+                const subEl = item.querySelector(".reveal-text-sub");
+
+                if (!textEl) return;
+
+                const rect = item.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+
+                // Start revealing when element is 80% from top, complete when at 30% from top
+                const startPoint = windowHeight * 0.8;
+                const endPoint = windowHeight * 0.3;
+
+                let progress = 0;
+
+                if (rect.top < startPoint) {
+                    progress = Math.min(
+                        1,
+                        Math.max(
+                            0,
+                            (startPoint - rect.top) / (startPoint - endPoint),
+                        ),
+                    );
+                }
+
+                // Apply the reveal effect
+                // background-position: 100% 0 (gray) -> 0% 0 (black/white)
+                const bgPosition = 100 - progress * 100;
+                textEl.style.backgroundPosition = `${bgPosition}% 0`;
+
+                // Reveal subtitle
+                if (subEl) {
+                    if (progress > 0.5) {
+                        subEl.classList.add("revealed");
+                    } else {
+                        subEl.classList.remove("revealed");
+                    }
+                }
+            });
+        }
+
+        // Update on scroll
+        window.addEventListener("scroll", updateReveal, { passive: true });
+
+        // Initial check
+        updateReveal();
+    }
+
+    // Initialize
+    document.addEventListener("DOMContentLoaded", setupTextReveal);
+
+    // Also run on load in case DOMContentLoaded already fired
+    if (
+        document.readyState === "complete" ||
+        document.readyState === "interactive"
+    ) {
+        setupTextReveal();
+    }
+</script>
